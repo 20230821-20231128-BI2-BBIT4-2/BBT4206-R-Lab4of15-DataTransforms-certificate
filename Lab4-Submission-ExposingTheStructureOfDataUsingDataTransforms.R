@@ -47,18 +47,16 @@ if (require("FactoMineR")) {
 }
 
 ##student dataset
-##Execute the following to load the downloaded Crop dataset:
+##Execute the following to load the student performance dataset:
 student_dataset <- read_csv("data/StudentPerformanceDataset.csv",)
-                         
-  
-
+##getting the various statistics of the dataset
 summary(student_dataset)
+
+# Scale Data Transform ----
+#Before it was transformed
 
 student_dataset_grade <- as.numeric(unlist(student_dataset[, 4]))
 hist(student_dataset_grade, main = names(student_dataset)[4])
-
-
-
 
 
 model_of_the_transform <- preProcess(student_dataset, method = c("scale"))
@@ -66,16 +64,12 @@ print(model_of_the_transform)
 student_dataset_scale_transform <- predict(model_of_the_transform,
                                           student_dataset)
 
-# AFTER
+# AFTER transformation
 summary(student_dataset_scale_transform)
 
 
  student_dataset_grade<- as.numeric(unlist(student_dataset[, 4]))
 hist(student_dataset_grade, main = names(student_dataset_scale_transform)[4])
-#hist(student_dataset_scale_transform[, 2], main = names(student_dataset_scale_transform)[2])
-#hist(student_dataset_scale_transform[, 4], main = names(student_dataset_scale_transform)[4])
-#hist(student_dataset_scale_transform[, 5], main = names(student_dataset_scale_transform)[5])
-#hist(student_dataset_scale_transform[, 6], main = names(student_dataset_scale_transform)[6])
 
 # Center Data Transform ----
 
@@ -225,7 +219,7 @@ model_of_the_transform <- preProcess(student_dataset,
                                      n.comp = 8)
 print(model_of_the_transform)
 student_dataset_ica_dr <- predict(model_of_the_transform, student_dataset)
-
+### ICA for Dimensionality Reduction on the Student Performance Dataset ----
 summary(student_dataset_ica_dr)
 
 
